@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import { Button, Card, Title, Divider, List } from 'react-native-paper';
+import { Button, Card, List } from 'react-native-paper';
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import { fetchRegionPokemons } from '../redux/slices/pokemons';
 
-const ListRegions = (props) => {
-    const navigation = props.navigation
+const ListRegions = ({navigation}) => {
+
     const dispatch = useDispatch();
 
     const arrRegions = useSelector(state => state.pokemons.regions);
@@ -27,7 +27,7 @@ const ListRegions = (props) => {
                             title={item.name}
                             titleStyle={styles.title}
                             onPress={() => {
-                                setRegion(item.url)
+                                setRegion(item)
                             }}
                         />
                     ))}

@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber; // unsubscribe on unmount
-    }, [user]);
+    }, []);
 
     if (initializing) return null;
 

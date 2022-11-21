@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     SafeAreaView,
     View,
@@ -6,6 +6,7 @@ import {
     Text,
 } from 'react-native';
 import { Button } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 // Redux
 import { useDispatch } from 'react-redux';
 import { fetchRegion, fetchAllPokemons } from '../redux/slices/pokemons';
@@ -25,9 +26,13 @@ const Home = ({ navigation }) => {
         navigation.navigate('ListPokemons')
     }
 
+    // useEffect(() => {
+
+    // }, [])
+
     return (
-        <SafeAreaView>
-            <View style={styles.content}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.contentBtns}>
                 <Button
                     compact='true'
                     uppercase='true'
@@ -40,24 +45,41 @@ const Home = ({ navigation }) => {
                     onPress={() => allPokemons()}>
                     Ver todos los pokemones
                 </Button>
-                <Text style={styles.title}>Equipos creados</Text>
+            </View>
+            <Text style={styles.title}>Equipos creados</Text>
+            <View style={styles.contentCard}>
+                <Card style={styles.team}>
+                    <Text></Text>
+                </Card>
             </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    content: {
-        padding: 20,
+    container: {
+        padding: 10,
+    },
+    contentBtns: {
+        padding: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     title: {
         textAlign: 'center',
         fontSize: 20,
-        paddingTop: 15,
+        paddingTop: 10,
+        paddingBottom: 20,
         fontFamily: 'Lato-Black'
     },
     button: {
         paddingBottom: 10,
+    },
+    contentCard: {
+        padding: 10,
+    },
+    team: {
+        padding: 20
     },
 })
 
