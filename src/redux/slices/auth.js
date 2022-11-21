@@ -20,8 +20,6 @@ export const auth = createSlice({
         },
         setUser(state, action) {
             state.user = action.payload;
-            // console.log(state.user.uid);
-            // console.log(state.user);
         }
     }
 });
@@ -30,8 +28,7 @@ export const { setInitializing, setUser } = auth.actions;
 
 export default auth.reducer;
 
-export const fetchLogin = () => async() => {
-    // console.log(state)
+export const fetchLogin = () => async () => {
     // Check if your device supports Google Play
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     // Get the users ID token
@@ -41,13 +38,17 @@ export const fetchLogin = () => async() => {
     const googleCredential = authFB.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    return authFB().signInWithCredential(googleCredential);
+    const user = await authFB().signInWithCredential(googleCredential);
 
     // Set data on database
-//     const ref = await database().ref(`/users/${state.user.uid}`)
-//     await ref.set({
-//         name: state.user.displayName
-//     })
+    const userData = user.user;
+    await database().ref(`/users/${userData.uid}`)
+        .set({
+            name: userData.displayName,
+            email: userData.email
+        })
+        .then(() => console.log("Guardado"))
+        .catch(err => console.log(err))
 }
 
 export const fetLogOut = () => () => {

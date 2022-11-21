@@ -16,7 +16,7 @@ import ListPokemons from './ListPokemons';
 import ListRegions from './ListRegions';
 import ListRegionPokemons from './ListRegionPokemons';
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetLogOut } from '../redux/slices/auth';
 
 const navigation = () => {

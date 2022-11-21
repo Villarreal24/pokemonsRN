@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     SafeAreaView,
     View,
     StyleSheet,
     Text,
-    FlatList,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser, setInitializing } from '../redux/slices/auth';
+import { useDispatch } from 'react-redux';
 import { fetchRegion, fetchAllPokemons } from '../redux/slices/pokemons';
-import auth from '@react-native-firebase/auth';
+
 
 const Home = ({ navigation }) => {
 
