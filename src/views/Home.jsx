@@ -8,16 +8,23 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-paper';
 // Redux
-import { useDispatch } from 'react-redux';
-import { fetchRegion } from '../redux/slices/pokemons';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser, setInitializing } from '../redux/slices/auth';
+import { fetchRegion, fetchAllPokemons } from '../redux/slices/pokemons';
+import auth from '@react-native-firebase/auth';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
     const createTeam = () => {
         dispatch(fetchRegion());
         navigation.navigate('CreateTeam')
+    }
+
+    const allPokemons = () => {
+        dispatch(fetchAllPokemons());
+        navigation.navigate('ListPokemons')
     }
 
     return (
@@ -27,7 +34,13 @@ const Home = ({navigation}) => {
                     compact='true'
                     uppercase='true'
                     onPress={() => createTeam()}>
-                        Crear equipo
+                    Crear equipo
+                </Button>
+                <Button
+                    compact='true'
+                    uppercase='true'
+                    onPress={() => allPokemons()}>
+                    Ver todos los pokemones
                 </Button>
                 <Text style={styles.title}>Equipos creados</Text>
             </View>

@@ -13,7 +13,7 @@ const ListRegions = (props) => {
 
     const setRegion = region => {
         dispatch(fetchRegionPokemons(region))
-        navigation.navigate('ListPokemons');
+        navigation.navigate('ListRegionPokemons');
     }
 
     return (
@@ -27,7 +27,7 @@ const ListRegions = (props) => {
                             title={item.name}
                             titleStyle={styles.title}
                             onPress={() => {
-                                setRegion(item.name)
+                                setRegion(item.url)
                             }}
                         />
                     ))}
@@ -41,14 +41,15 @@ const styles = StyleSheet.create({
     content: {
         paddingTop: 20,
         paddingBottom: 70,
-        marginLeft: 40,
-        marginRight: 40,
     },
     title: {
         fontFamily: 'Lato-Regular',
         fontSize: 17,
         paddingLeft: 10,
         textAlign: 'center',
+        // paddingBottom: 25,
+        // borderBottomColor: '#DCDCDC',
+        // borderBottomWidth: 1,
     },
 })
 

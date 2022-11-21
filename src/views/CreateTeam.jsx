@@ -7,14 +7,11 @@ import {
     FlatList,
 } from 'react-native';
 import ListRegions from '../components/ListRegions';
-// Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegionPokemons } from '../redux/slices/pokemons';
 
 const CreateTeam = ({navigation}) => {
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <Text style={styles.title}>Selecciona la región</Text>
                 <ListRegions
@@ -26,8 +23,11 @@ const CreateTeam = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     content: {
-        padding: 20,
+        paddingTop: 20,
     },
     title: {
         textAlign: 'center',

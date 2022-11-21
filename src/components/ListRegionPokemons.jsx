@@ -3,10 +3,11 @@ import { View, StyleSheet, Text, ScrollView, Dimensions } from 'react-native';
 import { Button, Card, Title, ActivityIndicator, List } from 'react-native-paper';
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
-const ListPokemons = () => {
+const ListRegionPokemons = (props) => {
 
-    const arrPokemons = useSelector(state => state.pokemons.allPokemons);
+    const arrPokemons = useSelector(state => state.pokemons.regionPokemons);
     
+
     return (
         <View>
             <ScrollView>
@@ -19,8 +20,8 @@ const ListPokemons = () => {
                         : 
                         arrPokemons.map(item => (
                             <List.Item
-                                key={item.name}
-                                title={item.name}
+                                key={item.entry_number}
+                                title={item.pokemon_species.name}
                                 titleStyle={styles.title}
                             />
                         ))}
@@ -34,13 +35,10 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Lato-Regular',
         textAlign: 'center',
-        paddingBottom: 25,
-        borderBottomColor: '#DCDCDC',
-        borderBottomWidth: 1,
     },
     contentLoading: {
         textAlignVertical: 'center'
     }
 })
 
-export default ListPokemons;
+export default ListRegionPokemons;

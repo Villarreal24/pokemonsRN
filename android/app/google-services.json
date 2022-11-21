@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "773447083531",
+    "firebase_url": "https://pokemons-a612c-default-rtdb.firebaseio.com",
+    "project_id": "pokemons-a612c",
+    "storage_bucket": "pokemons-a612c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773447083531:android:a8ab8dd8893a2e32b3c90e",
+        "android_client_info": {
+          "package_name": "com.pokemonsrn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773447083531-ea9v1as1leavtf4be0u2onmtrerr7hes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXQsKdcAvyqix71-uPElEO-AR1ylDnG-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773447083531-ea9v1as1leavtf4be0u2onmtrerr7hes.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
