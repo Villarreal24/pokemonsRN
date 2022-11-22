@@ -15,6 +15,7 @@ import CreateTeam from '../views/CreateTeam';
 import ListPokemons from './ListPokemons';
 import ListRegions from './ListRegions';
 import ListRegionPokemons from './ListRegionPokemons';
+import TeamDetails from './TeamDetails';
 // Redux
 import { useDispatch } from 'react-redux';
 import { fetLogOut } from '../redux/slices/auth';
@@ -59,6 +60,13 @@ const navigation = () => {
                                 <Text style={styles.textBtn}>Salir</Text>
                             </Pressable>
                         )
+                    }}
+                />
+                <Stack.Screen
+                    name="TeamDetails"
+                    component={TeamDetails}
+                    options={{
+                        title: "Detalles del equipo",
                     }}
                 />
                 <Stack.Screen

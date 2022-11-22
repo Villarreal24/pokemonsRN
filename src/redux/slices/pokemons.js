@@ -101,7 +101,7 @@ export const fetchSaveTeam = (payload) => async (dispatch) => {
     const region = payload.region;
     const team = payload.poke;
     const user = payload.user;
-    const ref = await database().ref('/teams').push();
+    const ref = await database().ref(`/teams/${user.uid}`).push();
         await ref.set({
             by: user.uid,
             region: region,
