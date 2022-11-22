@@ -37,15 +37,16 @@ export const fetchGetTeams = (payload) => async (dispatch) => {
 }
 
 export const fetchGetTeamDetails = (payload) => async (dispatch) => {
-    console.log(payload)
     const urlPokemon = ('https://pokeapi.co/api/v2/pokemon/');
     let arrPokemons = payload.pokemons;
     let newArr = [];
     for (const item of arrPokemons) {
         await axios.get(item.url)
-        // await axios.get('https://pokeapi.co/api/v2/pokemon-species/413')
+            // await axios.get('https://pokeapi.co/api/v2/pokemon-species/413')
             .then(async (res) => {
+                // ID
                 const id = res.data.id;
+                // DESCRIPTION
                 let description = '';
                 // VALIDATE IF EXIST DESCRIPTION TO PREVENT ERROR
                 if (res.data.form_descriptions[0]) {
@@ -53,6 +54,7 @@ export const fetchGetTeamDetails = (payload) => async (dispatch) => {
                 } else {
                     description = "No hay descripción."
                 }
+                // CREATE OBJECT TO ORGANICE THE DATA
                 let object = {
                     name: item.name,
                     id: id,
@@ -61,8 +63,12 @@ export const fetchGetTeamDetails = (payload) => async (dispatch) => {
                 };
                 await axios.get(`${urlPokemon}${id}`)
                     .then(result => {
+                        // TYPES
                         const types = result.data.types;
                         object.types = types;
+                        // IMAGE
+                        const imageUrl = result.data.sprites.front_default;
+                        object.imageUrl = imageUrl;
                     })
                 newArr.push(object);
             })

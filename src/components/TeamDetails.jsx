@@ -8,56 +8,54 @@ const TeamDetails = () => {
 
     const region = useSelector(state => state.teamPokemons.region);
     const teams = useSelector(state => state.teamPokemons.selectedTeam);
-    console.log(teams);
+    // console.log(teams);
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <Card style={styles.card}>
-                    <View>
-                        <Text style={styles.title}>Pokemons del equipo region
-                            <Text style={styles.textRegion}>  {region}</Text>
-                        </Text>
-                        {teams.map((poke, index) => (
-                            <View style={styles.containerPoke} key={index}>
-                                <View style={styles.contentPoke}>
-                                    <View>
-                                        {/* =========== POKEMON NAME =========== */}
-                                        <Text style={styles.textContent}>Nombre:
-                                            <Text style={styles.textPoke}>  {poke.name}</Text>
+                    <Text style={styles.title}>Pokemons del equipo region
+                        <Text style={styles.textRegion}>  {region}</Text>
+                    </Text>
+                    {teams.map((poke, index) => (
+                        <View style={styles.containerPoke} key={index}>
+                            <View style={styles.contentPoke}>
+                                <View>
+                                    {/* =========== POKEMON NAME =========== */}
+                                    <Text style={styles.textContent}>Nombre:
+                                        <Text style={styles.textPoke}>  {poke.name}</Text>
+                                    </Text>
+                                    {/* =========== POKEMON NUMBER =========== */}
+                                    <Text style={styles.textContent}>Numero:
+                                        <Text style={styles.textPoke}>  {poke.id}</Text>
+                                    </Text>
+                                    {/* =========== POKEMON TYPES =========== */}
+                                    <View style={styles.row}>
+                                        <Text style={styles.textContent}>Tipo:
+                                            {poke.types.map((item, index) => (
+                                                <Text
+                                                    key={index}
+                                                    style={styles.textPoke}> {item.type.name},
+                                                </Text>
+                                            ))}
                                         </Text>
-                                        {/* =========== POKEMON NUMBER =========== */}
-                                        <Text style={styles.textContent}>Numero:
-                                            <Text style={styles.textPoke}>  {poke.id}</Text>
-                                        </Text>
-                                        {/* =========== POKEMON TYPES =========== */}
-                                        <View style={styles.row}>
-                                            <Text style={styles.textContent}>Tipo:
-                                                {poke.types.map((poke, index) => (
-                                                    <Text
-                                                        key={index}
-                                                        style={styles.textPoke}> {poke.type.name},
-                                                    </Text>
-                                                ))}
-                                            </Text>
-                                        </View>
-                                    </View>
-
-                                    {/* =========== POKEMON IMAGE =========== */}
-                                    <View>
-                                        <Image
-                                            style={{ width: 150, height: 80 }}
-                                            source={{ uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png' }}
-                                        />
                                     </View>
                                 </View>
-                                {/* =========== POKEMON DESCRIPTION =========== */}
-                                <Text style={styles.textContent}>Descripción:
-                                    <Text>  {poke.description}</Text>
-                                </Text>
+
+                                {/* =========== POKEMON IMAGE =========== */}
+                                <View>
+                                    <Image
+                                        style={{ width: 110, height: 100 }}
+                                        source={{ uri: `${poke.imageUrl}`}}
+                                    />
+                                </View>
                             </View>
-                        ))}
-                    </View>
+                            {/* =========== POKEMON DESCRIPTION =========== */}
+                            <Text style={styles.textContent}>Descripción:
+                                <Text>  {poke.description}</Text>
+                            </Text>
+                        </View>
+                    ))}
                 </Card>
             </ScrollView>
         </View>

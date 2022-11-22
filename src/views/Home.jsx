@@ -32,9 +32,8 @@ const Home = ({ navigation }) => {
         navigation.navigate('ListPokemons')
     }
 
-    const selected = (team) => {
-        // console.log(team);
-        dispatch(fetchGetTeamDetails(team));
+    const selected = async(team) => {
+        await dispatch(fetchGetTeamDetails(team));
         navigation.navigate('TeamDetails');
     }
 
