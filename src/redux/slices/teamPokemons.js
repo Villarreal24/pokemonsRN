@@ -18,6 +18,9 @@ export const teamPokemons = createSlice({
         },
         setSelectedTeam: (state, action) => {
             state.selectedTeam = action.payload;
+        },
+        deleteTeam: (state, action) => {
+            state.deleteTeam = action.payload;
         }
     }
 });
@@ -40,9 +43,9 @@ export const fetchGetTeamDetails = (payload) => async (dispatch) => {
     const urlPokemon = ('https://pokeapi.co/api/v2/pokemon/');
     let arrPokemons = payload.pokemons;
     let newArr = [];
+    // GET VALUES OF POKEMONS
     for (const item of arrPokemons) {
         await axios.get(item.url)
-            // await axios.get('https://pokeapi.co/api/v2/pokemon-species/413')
             .then(async (res) => {
                 // ID
                 const id = res.data.id;
@@ -75,4 +78,10 @@ export const fetchGetTeamDetails = (payload) => async (dispatch) => {
     };
     dispatch(setSelectedRegion(payload.region));
     dispatch(setSelectedTeam(newArr));
+}
+
+export const deleteTeam = (payload) => async() => {
+    // UPDATE ARRAY ON DATABASE
+    await database().ref(`/teams/${payload.user}`)
+        .set(payload.newArr)
 }

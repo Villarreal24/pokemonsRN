@@ -8,7 +8,6 @@ const TeamDetails = () => {
 
     const region = useSelector(state => state.teamPokemons.region);
     const teams = useSelector(state => state.teamPokemons.selectedTeam);
-    // console.log(teams);
 
     return (
         <View style={styles.container}>

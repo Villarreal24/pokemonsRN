@@ -6,13 +6,15 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
+    Pressable,
+    Alert,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Card } from 'react-native-paper';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegion, fetchAllPokemons } from '../redux/slices/pokemons';
-import { fetchGetTeams, fetchGetTeamDetails } from '../redux/slices/teamPokemons';
+import { fetchGetTeams, fetchGetTeamDetails, deleteTeam } from '../redux/slices/teamPokemons';
 
 
 const Home = ({ navigation }) => {
@@ -32,10 +34,32 @@ const Home = ({ navigation }) => {
         navigation.navigate('ListPokemons')
     }
 
-    const selected = async(team) => {
+    const selected = async (team) => {
         await dispatch(fetchGetTeamDetails(team));
         navigation.navigate('TeamDetails');
     }
+
+    const deletePoke = (item) => {{
+        Alert.alert(
+            'Deseas eliminar este equipo',
+            'No se podra revertir.',
+            [
+                { text: 'Cancelar'},
+                {
+                    text: 'Si, eliminar', onPress: async() => {
+                        const newArr = teams.filter(
+                            (team, index) => index !== item);
+                        const object = {
+                            user: user.uid,
+                            newArr: newArr,
+                        }
+                        await dispatch(deleteTeam(object));
+                        await dispatch(fetchGetTeams(user.uid));
+                    }
+                }
+            ]
+        )
+    }}
 
     useEffect(() => {
         dispatch(fetchGetTeams(user.uid));
@@ -71,13 +95,21 @@ const Home = ({ navigation }) => {
                                 <Text style={styles.subtitle}>Equipo de region:
                                     <Text style={styles.textRegion}>  {item.region}</Text>
                                 </Text>
-                                {item.pokemons.map((poke, index) => (
-                                    <View key={index}>
-                                        <Text style={styles.textPoke}>Nombre:
-                                            <Text style={styles.namePoke}>  {poke.name}</Text>
-                                        </Text>
-                                    </View>
-                                ))}
+                                <View key={styles.rowPokemons}>
+                                    <Text style={styles.textPoke}>Pokemones:
+                                        {item.pokemons.map((poke, index) => (
+                                            <Text key={index} style={styles.namePoke}>  {poke.name},</Text>
+                                        ))}
+                                    </Text>
+                                </View>
+                                <View style={styles.contentBtnDelete}>
+                                    <Pressable
+                                        style={styles.btnDelete}
+                                        onPress={() => deletePoke(index)}
+                                        >
+                                        <Text style={styles.textBtnDelete}>Eliminar</Text>
+                                    </Pressable>
+                                </View>
                             </Card>
                         </TouchableOpacity>
                     ))}
@@ -120,6 +152,10 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#939393'
     },
+    rowPokemons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     textRegion: {
         fontSize: 15,
         textTransform: 'uppercase',
@@ -130,11 +166,25 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         textTransform: 'capitalize',
         fontFamily: 'Lato-Regular',
-        fontWeight: '600'
+        fontWeight: '600',
     },
     namePoke: {
         fontFamily: 'Lato-Black',
-    }
+    },
+    contentBtnDelete: {
+        marginTop: 15,
+        width: 70,
+    },
+    btnDelete: {
+        padding: 6,
+        // paddingHorizontal: 10,
+        backgroundColor: '#F11A00',
+        borderRadius: 5,
+    },
+    textBtnDelete: {
+        color: '#FFF',
+        fontFamily: 'Lato-Black',
+    },
 })
 
 export default Home;

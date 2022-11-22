@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Alert } from 'rea
 import { Button, Card, Banner, ActivityIndicator, List } from 'react-native-paper';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { resetTeam, fetchSaveTeam, fetchSelectTeam } from '../redux/slices/pokemons';
+import { resetTeam, fetchSaveTeam, fetchSelectTeam, setTeam } from '../redux/slices/pokemons';
 const ListRegionPokemons = ({ navigation }) => {
 
     const dispatch = useDispatch();
@@ -28,8 +28,7 @@ const ListRegionPokemons = ({ navigation }) => {
     const selector = (poke) => {
         const pokemon = poke.pokemon_species;
         if (team.length <= 5) {
-            dispatch(fetchSelectTeam(pokemon))
-            setBanner(true);
+            dispatch(setTeam(pokemon));
         }
     }
 
@@ -61,19 +60,19 @@ const ListRegionPokemons = ({ navigation }) => {
     return (
         <View>
             <Banner
-                visible={banner}
+                visible={true}
                 actions={[
                     {
                         label: 'Borrar',
                         onPress: () => dispatch(resetTeam([]))
                     },
                     {
-                        label: 'Guardar',
+                        label: 'Guardar equipo',
                         onPress: () => createTeam()
                     }
                 ]}
-            >
-                Pokemones seleccionados: {team.length}
+            >              
+                <Text>Pokemones seleccionados: {team.length}</Text>
             </Banner>
             <ScrollView>
                 <Card>
@@ -102,6 +101,9 @@ const styles = StyleSheet.create({
     contentLoading: {
         flex: 1,
         marginTop: 100
+    },
+    textBanner: {
+        paddingBottom: 10
     },
     title: {
         fontFamily: 'Lato-Regular',

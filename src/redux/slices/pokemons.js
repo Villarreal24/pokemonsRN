@@ -85,15 +85,11 @@ export const fetchRegionPokemons = (payload) => (dispatch) => {
 
 export const fetchAllPokemons = () => (dispatch) => {
     const baseUrl = 'https://pokeapi.co/api/v2';
-    axios.get(`${baseUrl}/pokemon`)
+    axios.get(`${baseUrl}/pokemon?limit=1000`)
         .then(res => {
             const pokemons = res.data.results
             dispatch(setAllPokemons(pokemons))
         })
-}
-
-export const fetchSelectTeam = (payload) => (dispatch) => {
-    dispatch(setTeam(payload));
 }
 
 export const fetchSaveTeam = (payload) => async (dispatch) => {
