@@ -1,8 +1,10 @@
 Bienvenido a la aplicación de pokemones.
 
-Instale las dependencias con "npm install".
+Instale las dependencias con
+npm install
 
-Inicie el proyecto en su emulator con "npx react-native run-android".
+Inicie el proyecto en su emulator con
+npx react-native run-android
 
 El proyecto a sido desarrollado y probado solamente con el sistema operativo Android, por lo cual en IOS
 no le funcionara, mas delante se incluira una actualización con pruebas y el resto de dependencias para
